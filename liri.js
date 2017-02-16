@@ -14,8 +14,9 @@ var liri = {
 				}	
 		})
 	},
-
+// Function that will pull tweets using the npm Twitter package.
 	pullTweets: function(){
+		// Write the user's input in the log.txt file.
 		liri.write("User input: " + liri.userInput);
 	
 		// Requiring Twitter npm and keys.js.
@@ -43,7 +44,7 @@ var liri = {
 		});
 
 	},
-
+// Function that will pull song data from Spotify using the npm Spotify package.
 	pullSpotify: function(request){
 		liri.write("User input: " + liri.userInput);
 	
@@ -72,7 +73,7 @@ var liri = {
 				});
 
 	},
-
+// Function that will pull movie data using the npm IMDB package.
 	pullImdb: function(){
 		liri.write("User input: " + liri.userInput);
 
@@ -109,7 +110,7 @@ var liri = {
 
 // Conditionals based on user request go down here.
 if (liri.userInput === "my-tweets"){
-
+	// Call the function to pull tweets.
 	liri.pullTweets();	
 
 } else if (liri.userInput === "spotify-this-song"){
@@ -140,7 +141,7 @@ if (liri.userInput === "my-tweets"){
 					console.log("************************************************");
 			});
 	} else if (liri.request === liri.request) {
-
+		// Call data to pull Spotify data.
 		liri.pullSpotify(liri.request);
 	}
 
@@ -171,7 +172,7 @@ if (liri.userInput === "my-tweets"){
 
 			});
 		} else if (liri.request === liri.request) {
-
+		// Call data to pull IMDB data. 
 			liri.pullImdb(liri.request);
 		}
 
