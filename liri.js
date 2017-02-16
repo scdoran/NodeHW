@@ -59,49 +59,51 @@ if (liri.userInput === "my-tweets"){
 // Combining Node process.argv from index 3 and beyond to create a single request.
 	for (var i=3; i < liri.nodeArgs.length; i++){
 		liri.request = liri.request + " " + liri.nodeArgs[i];
+	
+		var newRequest= liri.request;
+		
+		// If the user puts in a request Spotify will pull up the first 5 matches.
+		if (liri.request === liri.request) {
+			spotify.search({ type: 'track', query: liri.request }, function(err, data) {
+			    if ( err ) {
+			    	console.log(err);
+			    }
+				for (var i = 0; i < 5; i++) {
+					console.log("************************************************");
+					console.log("Artist: " + data.tracks.items[i].artists[0].name);
+					console.log("Song Name: " + data.tracks.items[i].name);
+					console.log("Preview Link: " + data.tracks.items[i].preview_url);
+					console.log("Album: " + data.tracks.items[i].album.name);
+					console.log(" ");
+					console.log("************************************************");
+					liri.write(" " + " Result " + [i] + " " + 
+								" Artist: " + data.tracks.items[i].artists[0].name + 
+								" Song Name: " + data.tracks.items[i].name + 
+								" Preview Link: " + data.tracks.items[i].preview_url + 
+								" Album: " + data.tracks.items[i].album.name + ""); 
+				}
+			});
+		} 
 	}
-
-	// If the user puts in a request Spotify will pull up the first 5 matches.
-	if (liri.request === liri.request) {
-		spotify.search({ type: 'track', query: liri.request }, function(err, data) {
-		    if ( err ) {
-		    	console.log(err);
-		    }
-			for (var i = 0; i < 5; i++) {
-				console.log("************************************************");
-				console.log("Artist: " + data.tracks.items[i].artists[0].name);
-				console.log("Song Name: " + data.tracks.items[i].name);
-				console.log("Preview Link: " + data.tracks.items[i].preview_url);
-				console.log("Album: " + data.tracks.items[i].album.name);
-				console.log(" ");
-				console.log("************************************************");
-				liri.write(" " + " Result " + [i] + " " + 
-							" Artist: " + data.tracks.items[i].artists[0].name + 
-							" Song Name: " + data.tracks.items[i].name + 
-							" Preview Link: " + data.tracks.items[i].preview_url + 
-							" Album: " + data.tracks.items[i].album.name + ""); 
-			}
-		});
-	} 
 	// Calling npm to pull data specifically for the song "The Sign" from Spotify if the user does not enter a request.
-	if (liri.request === null) {
+	if (liri.request === "") {
 		console.log(liri.request);
 
 		liri.write("User input: " + liri.userInput + " Request was left blank.");
 
-		// spotify.search({type: 'track', query: 'The Sign'}, function(err, data) {
-		// 	if (err){
-		// 		console.log(err);
-		// 	}
-		// 		console.log("************************************************");
-		// 		console.log(" ");
-		// 		console.log("Artist: " + data.tracks.items[4].artists[0].name);
-		// 		console.log("Song Name: " + data.tracks.items[4].name);
-		// 		console.log("Preview Link: " + data.tracks.items[4].preview_url);
-		// 		console.log("Album: " + data.tracks.items[4].album.name);
-		// 		console.log(" ");
-		// 		console.log("************************************************");
-		// });
+		spotify.search({type: 'track', query: 'The Sign'}, function(err, data) {
+			if (err){
+				console.log(err);
+			}
+				console.log("************************************************");
+				console.log(" ");
+				console.log("Artist: " + data.tracks.items[4].artists[0].name);
+				console.log("Song Name: " + data.tracks.items[4].name);
+				console.log("Preview Link: " + data.tracks.items[4].preview_url);
+				console.log("Album: " + data.tracks.items[4].album.name);
+				console.log(" ");
+				console.log("************************************************");
+		});
 	}
 	  		
 }else if (liri.userInput === "movie-this"){
@@ -114,47 +116,50 @@ if (liri.userInput === "my-tweets"){
 	// Combining Node process.argv from index 3 and beyond to create a single request.
 	for (var i=3; i < liri.nodeArgs.length; i++){
 		liri.request = liri.request + " " + liri.nodeArgs[i];
-	}
 	
-	// If the user puts in a request IMDB will pull up the first match.
-	if (liri.request === liri.request){
-		imdb.searchMovie({ query: liri.request }, (err, res) => {
-			if (err){
-				console.log(err); 
-	  		}
-	  		// If you want to loop through more than one result.
-			// for (var i = 0; i < 5; i++) {
-				console.log("************************************************");
-				console.log(" ");
-		  		console.log("Movie Title: " + res.results[0].original_title);
-			  	console.log("Release date: " + res.results[0].release_date);
-			  	console.log("Language: " + res.results[0].original_language);
-			  	console.log("Plot: " + res.results[0].overview);
-			  	console.log("IMDB Rating: " + res.results[0].vote_average);
-				console.log(" ");
-				console.log("************************************************");
-				liri.write(" " + " Result " + [0] + " " + 
-							" Movie Title: " + res.results[0].original_title + 
-							" Release date: " + res.results[0].release_date + 
-							" Language: " + res.results[0].original_language + 
-							" Plot: " + res.results[0].overview + 
-							" IMDB Rating: " + res.results[0].vote_average + " "); 
-			// }
-		});
+		var newRequest= liri.request;
+		console.log(newRequest);
+
+		// If the user puts in a request IMDB will pull up the first match.
+		if (liri.request === newRequest){
+			imdb.searchMovie({ query: liri.request }, (err, res) => {
+				if (err){
+					console.log(err); 
+		  		}
+		  		// If you want to loop through more than one result.
+				// for (var i = 0; i < 5; i++) {
+					console.log("************************************************");
+					console.log(" ");
+			  		console.log("Movie Title: " + res.results[0].original_title);
+				  	console.log("Release date: " + res.results[0].release_date);
+				  	console.log("Language: " + res.results[0].original_language);
+				  	console.log("Plot: " + res.results[0].overview);
+				  	console.log("IMDB Rating: " + res.results[0].vote_average);
+					console.log(" ");
+					console.log("************************************************");
+					liri.write(" " + " Result " + [0] + " " + 
+								" Movie Title: " + res.results[0].original_title + 
+								" Release date: " + res.results[0].release_date + 
+								" Language: " + res.results[0].original_language + 
+								" Plot: " + res.results[0].overview + 
+								" IMDB Rating: " + res.results[0].vote_average + " "); 
+				// }
+			});
+		}
 	}
 	// Calling npm to pull data specifically for the movie "Mr. Nobody" from IMDB if the user does not enter a request.
-	else if (liri.request === null) {
+	if (liri.request === "") {
 		console.log(liri.request);
 	
 		liri.write("User input: " + liri.userInput + " Request was left blank.");
 
-		// imdb.searchMovie({ query: "Mr. Nobody" }, (err, res) => {
-		// 	console.log("Movie Title: " + res.results[0].original_title);
-		// 	console.log("Release date: " + res.results[0].release_date);
-		// 	console.log("Language: " + res.results[0].original_language);
-		// 	console.log("Plot: " + res.results[0].overview);
-		// 	console.log("IMDB Rating: " + res.results[0].vote_average);
-		// });
+		imdb.searchMovie({ query: "Mr. Nobody" }, (err, res) => {
+			console.log("Movie Title: " + res.results[0].original_title);
+			console.log("Release date: " + res.results[0].release_date);
+			console.log("Language: " + res.results[0].original_language);
+			console.log("Plot: " + res.results[0].overview);
+			console.log("IMDB Rating: " + res.results[0].vote_average);
+		});
 	}
 
 } else if (liri.userInput === "do-what-it-says"){
