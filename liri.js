@@ -64,7 +64,7 @@ var liri = {
 						console.log("Album: " + data.tracks.items[i].album.name);
 						console.log(" ");
 						console.log("************************************************");
-						liri.write(" " + " Result " + [i] + " " + 
+						liri.write("\n " + " Result " + [i] + " " + 
 									" Artist: " + data.tracks.items[i].artists[0].name + 
 									" Song Name: " + data.tracks.items[i].name + 
 									" Preview Link: " + data.tracks.items[i].preview_url + 
@@ -96,7 +96,7 @@ var liri = {
 					  	console.log("IMDB Rating: " + res.results[0].vote_average);
 						console.log(" ");
 						console.log("************************************************");
-						liri.write(" " + " Result " + [0] + " " + 
+						liri.write("\n " + " Result " + [0] + " " + 
 									" Movie Title: " + res.results[0].original_title + 
 									" Release date: " + res.results[0].release_date + 
 									" Language: " + res.results[0].original_language + 
